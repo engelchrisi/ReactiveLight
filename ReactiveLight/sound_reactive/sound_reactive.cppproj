@@ -248,12 +248,16 @@
         <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
       </AvrGccCpp>
     </ToolchainSettings>
+    <PostBuildEvent>C:\bin\avrdude_nano.cmd 8 $(OutputDirectory)\$(OutputFileName).hex</PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CachedValue.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DipSwitch.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Logging.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="pins.h">

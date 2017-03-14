@@ -31,16 +31,16 @@
 // no other PWM on this pin
 
 //The pin that we read sensor values from microphone
-#define APIN_MIC_SENSOR		A0
+#define APIN_MIC_SENSOR					A0
 
 // initialization of randomSeed
-#define APIN_UNCONNECTED_FOR_RND     A5
+#define APIN_UNCONNECTED_FOR_RND		A5
 
 // the poti to change the noice level
-#define APIN_POTI_NOICE_LEVEL		A6
+#define APIN_POTI_NOICE_LEVEL			A6
 
 // the poti to change the maximum value
-#define APIN_POTI_MAX_MIC_LEVEL		A7
+#define APIN_POTI_MAX_MIC_LEVEL			A7
 
 #define DPIN_DIP_0				2
 #define DPIN_DIP_1				3
