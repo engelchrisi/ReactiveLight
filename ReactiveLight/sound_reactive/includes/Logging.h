@@ -2,12 +2,28 @@
 #define _LOGGING_H__
 
 #define LOGGING			0
-#define LOG_TIMESTAMP	0
+#define LOG_TIMESTAMP	1
 
 #define g_logger	Serial
 #define ERR_PREFIX  "ERROR: "
 
 #if LOGGING
+
+extern char g_bufLogging[256];
+
+#if LOG_TIMESTAMP
+#define LOGVAL_SENSOR(format, a, b, c, d, e, f) \
+{ \
+	sprintf(g_bufLogging, "%li| " format, millis(),  a, b, c, d, e, f); \
+	Serial.println(g_bufLogging); \
+}
+#else
+#define LOGVAL_SENSOR(format,  a, b, c, d, e, fg) \
+{ \
+	sprintf(g_bufLogging, format,  a, b, c, d, e, fg); \
+	Serial.println(g_bufLogging); \
+}
+#endif
 
 #define		LOGBEGEOF(text)	BegEofLogger	__eof(F(text));
 
@@ -31,7 +47,7 @@
 	#define LOG_PREFIX(a) \
 	{ \
 		/*_logger.printPrefix(); LOGMEM("");*/ \
-		g_logger.print(millis()); g_logger.print(": "); \
+		g_logger.print(millis()); g_logger.print("| "); \
 		g_logger.print(a); \
 	}
 #else
@@ -102,7 +118,11 @@
 #define LOGF9(a, b, c, d, e, f, g, h, i)
 #define LOGF10(a, b, c, d, e, f, g, h, i, j)
 
+#define LOGVAL_SENSOR(format,  a, b, c, d, e, f)
+
 #endif // _DEBUG
+
+
 
 class  BegEofLogger
 {

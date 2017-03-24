@@ -54,7 +54,6 @@
         <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
         <avrgcc.compiler.symbols.DefSymbols>
           <ListValues>
-            <Value>NDEBUG</Value>
             <Value>F_CPU=16000000L</Value>
             <Value>ARDUINO=106012</Value>
             <Value>ARDUINO_AVR_UNO</Value>
@@ -62,6 +61,7 @@
             <Value>USB_VID=0x2341</Value>
             <Value>USB_PID=0x0043</Value>
             <Value>USB_MANUFACTURER="\"Arduino LLC\""</Value>
+            <Value>NDEBUG</Value>
           </ListValues>
         </avrgcc.compiler.symbols.DefSymbols>
         <avrgcc.compiler.directories.IncludePaths>
@@ -94,7 +94,6 @@
         <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
         <avrgcccpp.compiler.symbols.DefSymbols>
           <ListValues>
-            <Value>NDEBUG</Value>
             <Value>F_CPU=16000000L</Value>
             <Value>ARDUINO=106012</Value>
             <Value>ARDUINO_AVR_UNO</Value>
@@ -102,6 +101,7 @@
             <Value>USB_VID=0x2341</Value>
             <Value>USB_PID=0x0043</Value>
             <Value>USB_MANUFACTURER="\"Arduino LLC\""</Value>
+            <Value>NDEBUG</Value>
           </ListValues>
         </avrgcccpp.compiler.symbols.DefSymbols>
         <avrgcccpp.compiler.directories.IncludePaths>
@@ -120,6 +120,7 @@
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\fastled\platforms\arm\stm32</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\fastled\platforms\esp\8266</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\standard</Value>
+            <Value>../includes</Value>
           </ListValues>
         </avrgcccpp.compiler.directories.IncludePaths>
         <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
@@ -158,7 +159,6 @@
         <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
         <avrgcc.compiler.symbols.DefSymbols>
           <ListValues>
-            <Value>DEBUG</Value>
             <Value>F_CPU=16000000L</Value>
             <Value>ARDUINO=106012</Value>
             <Value>ARDUINO_AVR_UNO</Value>
@@ -166,6 +166,7 @@
             <Value>USB_VID=0x2341</Value>
             <Value>USB_PID=0x0043</Value>
             <Value>USB_MANUFACTURER="\"Arduino LLC\""</Value>
+            <Value>DEBUG</Value>
           </ListValues>
         </avrgcc.compiler.symbols.DefSymbols>
         <avrgcc.compiler.directories.IncludePaths>
@@ -198,7 +199,6 @@
         <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
         <avrgcccpp.compiler.symbols.DefSymbols>
           <ListValues>
-            <Value>DEBUG</Value>
             <Value>F_CPU=16000000L</Value>
             <Value>ARDUINO=106012</Value>
             <Value>ARDUINO_AVR_UNO</Value>
@@ -206,6 +206,7 @@
             <Value>USB_VID=0x2341</Value>
             <Value>USB_PID=0x0043</Value>
             <Value>USB_MANUFACTURER="\"Arduino LLC\""</Value>
+            <Value>DEBUG</Value>
           </ListValues>
         </avrgcccpp.compiler.symbols.DefSymbols>
         <avrgcccpp.compiler.directories.IncludePaths>
@@ -224,6 +225,8 @@
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\fastled\platforms\arm\stm32</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\fastled\platforms\esp\8266</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\standard</Value>
+            <Value>../includes</Value>
+            <Value>\..\ArduinoCore\include\libraries\Adafruit_NeoPixel</Value>
           </ListValues>
         </avrgcccpp.compiler.directories.IncludePaths>
         <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
@@ -251,19 +254,61 @@
     <PostBuildEvent>C:\bin\avrdude_nano.cmd 8 $(OutputDirectory)\$(OutputFileName).hex</PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CachedValue.h">
+    <Compile Include="includes\CachedValue.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="DipSwitch.h">
+    <Compile Include="includes\DipSwitch.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Logging.h">
+    <Compile Include="includes\DiscoLightTask.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="pins.h">
+    <Compile Include="includes\DynamicBuffer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="includes\DynamicPtrBuffer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="includes\FastLedTask.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="includes\IClearable.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="includes\Logging.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="includes\pins.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="includes\SoundUtils.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="includes\stdafx.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="includes\taskQueue.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="includes\Utils.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Sketch.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Tasks\DiscoLightTask.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Tasks\FastLedTask.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Tasks\taskQueue.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Utils\SoundUtils.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Utils\Utils.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Content Include="readme.html">
@@ -275,6 +320,11 @@
       <Project>3641493b-b287-4ff4-8b43-9e9d9608ee78</Project>
       <Private>True</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="includes" />
+    <Folder Include="Utils" />
+    <Folder Include="Tasks" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

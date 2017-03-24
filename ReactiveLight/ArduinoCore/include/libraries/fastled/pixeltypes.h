@@ -105,6 +105,12 @@ struct CRGB {
         };
 		uint8_t raw[3];
 	};
+	
+	inline operator uint32_t () __attribute__((always_inline))
+	{
+		uint32_t value= uint32_t(r) << 16 | uint32_t(g) << 8 | uint32_t(b);
+		return value;
+	}
 
   /// Array access operator to index into the crgb object
 	inline uint8_t& operator[] (uint8_t x) __attribute__((always_inline))
