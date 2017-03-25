@@ -1,66 +1,14 @@
 #ifndef __NeoPatterns_H_
 #define __NeoPatterns_H_
 
-#include "taskQueue.h"
 #include "SoundUtils.h"
 
-//How much to increment or decrement each color every cycle
-struct RgbColorT {
-	int r;
-	int g;
-	int b;
-};
 
 
-void addOffset(uint8_t& color, int colOffset);
-void addOffset(CRGB& rgb, const RgbColorT& offset);
-void fade(CRGB& rgb, float fade_scale);
 
-class FastLedTaskBase
-{
-public:
-	typedef CRGB Color;
 
-	FastLedTaskBase(CLEDController& controller) : m_controller(controller)
-	{
-	}
-	
-	CRGB * getLEDs() {
-		return m_controller.leds();
-	}
-	
-	int getNumLEDs() const {
-		return m_controller.size();
-	}
-	
-	CRGB getPixelColor(int i) 
-	{
-		const CRGB* leds= m_controller.leds();
-		
-		if (i < getNumLEDs())
-			return leds[i];
-		return CRGB(0,0,0);
-	}
-	
-	void setPixelColor(int i, const CRGB& color) 
-	{
-		if (i < getNumLEDs())
-		{
-			CRGB* leds= getLEDs();
-			leds[i]= color;
-		}
-	}
-	
-	void show()
-	{
-		FastLED.show();
-	}
-	
-protected:
-	CLEDController& m_controller;
-};
 
-class FastLedTask : public RecurringTask, public FastLedTaskBase, public SoundBase
+class FastLedTask : public Process, public FastLedTaskBase, public SoundBase
 {
 private:
 	unsigned long mRuntimeMs;

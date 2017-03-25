@@ -121,6 +121,8 @@
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\fastled\platforms\esp\8266</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\standard</Value>
             <Value>../includes</Value>
+            <Value>../../ArduinoCore/include/libraries/ringbuf</Value>
+            <Value>../../ArduinoCore/include/libraries/Arduino_Process_Scheduler</Value>
           </ListValues>
         </avrgcccpp.compiler.directories.IncludePaths>
         <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
@@ -226,7 +228,8 @@
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\fastled\platforms\esp\8266</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\standard</Value>
             <Value>../includes</Value>
-            <Value>\..\ArduinoCore\include\libraries\Adafruit_NeoPixel</Value>
+            <Value>../../ArduinoCore/include/libraries/ringbuf</Value>
+            <Value>../../ArduinoCore/include/libraries/Arduino_Process_Scheduler</Value>
           </ListValues>
         </avrgcccpp.compiler.directories.IncludePaths>
         <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
@@ -251,28 +254,49 @@
         <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
       </AvrGccCpp>
     </ToolchainSettings>
-    <PostBuildEvent>C:\bin\avrdude_nano.cmd 8 $(OutputDirectory)\$(OutputFileName).hex</PostBuildEvent>
+    <PostBuildEvent>C:\bin\avrdude_uno.cmd 7 $(OutputDirectory)\$(OutputFileName).hex</PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Animation\ColorUpdateProcess.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Animation\LedUpdateProcessBase.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Animation\SampleProcess.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Animation\TheaterChaseAnimation.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Animation\UpDownAnimation.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="includes\AnimationBase.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="includes\CachedValue.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="includes\ColorUpdateProcess.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="includes\DipSwitch.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="includes\DiscoLightTask.h">
+    <Compile Include="includes\FastLedBase.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="includes\DynamicBuffer.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="includes\DynamicPtrBuffer.h">
+    <Compile Include="includes\FastLedBase.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="includes\FastLedTask.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="includes\IClearable.h">
+    <Compile Include="includes\LedUpdateProcessBase.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="includes\LedUtils.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="includes\Logging.h">
@@ -281,13 +305,19 @@
     <Compile Include="includes\pins.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="includes\SampleProcess.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="includes\SoundUtils.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="includes\stdafx.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="includes\taskQueue.h">
+    <Compile Include="includes\TheaterChaseAnimation.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="includes\UpDownAnimation.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="includes\Utils.h">
@@ -296,13 +326,10 @@
     <Compile Include="Sketch.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Tasks\DiscoLightTask.cpp">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Tasks\FastLedTask.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Tasks\taskQueue.cpp">
+    <Compile Include="Utils\LedUtils.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Utils\SoundUtils.cpp">
@@ -323,6 +350,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="includes" />
+    <Folder Include="Animation" />
     <Folder Include="Utils" />
     <Folder Include="Tasks" />
   </ItemGroup>

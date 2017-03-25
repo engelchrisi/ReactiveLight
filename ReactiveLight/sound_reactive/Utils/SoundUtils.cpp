@@ -16,6 +16,13 @@
 #define HIGH_LIMIT	((30 * 5) / DELAY_MS)
 
 
+SoundBase::SoundBase(ModeStatisticsT& modeStats, SongStatisticsT& songStats)
+		: _modeStats(modeStats), _songStats(songStats)
+
+{
+}
+
+
 bool SoundBase::updateSoundStatistics(int log2Samples)
 {
 	updateRawSoundStatistics(log2Samples);
@@ -49,9 +56,11 @@ bool SoundBase::updateSoundStatistics(int log2Samples)
 		_songStats.songAvgSum = _songStats.songAvg;
 		_songStats.songAvgCounter = 1;
 	}
+	
 
 	//Check if we enter SM_HIGH mode
 	detectHighMode(sensorValue);
+
 	_songStats.sensorValue= sensorValue;
 	
 	LOGVAL_SENSOR("%i;%i;%i;%i;%i;%lu", (_modeStats.songMode == SM_NORMAL)? 0:10, 

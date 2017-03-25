@@ -20,8 +20,8 @@
 	#define MAX_MIC_LEVEL				(550)
 #elif ADAFRUIT_MAX4466
 	#define VolumeGainFactorBits 	1
-	#define NOICE_MAX 				10
-	#define MAX_MIC_LEVEL 			250
+	#define NOICE_MAX 				130
+	#define MAX_MIC_LEVEL 			500
 #else
 	#define NOICE_MAX 			(1)  // Noise/hum/interference in mic signal
 	#define MAX_MIC_LEVEL     (1024)
@@ -102,6 +102,9 @@ struct SongStatisticsT {
 
 class SoundBase
 {
+public:
+	SoundBase(ModeStatisticsT& modeStats, SongStatisticsT& songStats);
+
 protected:
 	bool updateSoundStatistics(int log2Samples);
 
@@ -112,8 +115,8 @@ private:
 	int readMaxMicLevel();
 
 protected:
-	ModeStatisticsT _modeStats;
-	SongStatisticsT	_songStats;
+	ModeStatisticsT&	_modeStats;
+	SongStatisticsT&	_songStats;
 
 };
 

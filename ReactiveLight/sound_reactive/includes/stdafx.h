@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include <FastLED.h>
+#include <ProcessScheduler.h>
 
 
 #ifndef _countof
@@ -21,6 +22,7 @@
 #include "Logging.h"
 #include "Utils.h"
 #include "SoundUtils.h"
+#include "LedUtils.h"
 
 
 // use utils::delayMs instead
