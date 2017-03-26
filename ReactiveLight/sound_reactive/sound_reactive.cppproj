@@ -260,10 +260,22 @@
     <Compile Include="Animation\ColorUpdateProcess.cpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Animation\ColorWipeAnimation.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Animation\FadeAnimation.cpp">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Animation\LedUpdateProcessBase.cpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Animation\RainbowAnimation.cpp">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Animation\SampleProcess.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Animation\ScannerAnimation.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Animation\TheaterChaseAnimation.cpp">
@@ -281,16 +293,19 @@
     <Compile Include="includes\ColorUpdateProcess.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="includes\ColorWipeAnimation.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="includes\DipSwitch.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="includes\FadeAnimation.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="includes\FastLedBase.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="includes\FastLedBase.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="includes\FastLedTask.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="includes\LedUpdateProcessBase.h">
@@ -305,7 +320,13 @@
     <Compile Include="includes\pins.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="includes\RainbowAnimation.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="includes\SampleProcess.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="includes\ScannerAnimation.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="includes\SoundUtils.h">
@@ -324,9 +345,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Sketch.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Tasks\FastLedTask.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Utils\LedUtils.cpp">
@@ -352,7 +370,6 @@
     <Folder Include="includes" />
     <Folder Include="Animation" />
     <Folder Include="Utils" />
-    <Folder Include="Tasks" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

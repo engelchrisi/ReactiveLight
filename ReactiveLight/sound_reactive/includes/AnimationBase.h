@@ -17,9 +17,9 @@ class AnimationBase : public IAnimation
 	
 public:
 	AnimationBase(Scheduler &manager, CLEDController* pController)
-	: _sampleProcess(manager, HIGH_PRIORITY, 100, _modeStats, _songStats),
-	_colorUpdateProcess(manager, MEDIUM_PRIORITY, 50, _modeStats, _songStats, _colorSettings),
-	_ledUpdateProcess(manager, LOW_PRIORITY, 100, pController, _modeStats, _songStats, _colorSettings)
+		: _sampleProcess(manager, HIGH_PRIORITY, 100, _modeStats, _songStats),
+		_colorUpdateProcess(manager, MEDIUM_PRIORITY, 50, _modeStats, _songStats, _colorSettings),
+		_ledUpdateProcess(manager, LOW_PRIORITY, 100, pController, _modeStats, _songStats, _colorSettings)
 	{
 		_sampleProcess.add();
 		_colorUpdateProcess.add();
@@ -33,7 +33,6 @@ public:
 		_colorUpdateProcess.destroy();
 		_ledUpdateProcess.destroy();	
 	}
-
 
 	virtual void Enable()
 	{
@@ -49,7 +48,7 @@ public:
 		_ledUpdateProcess.disable();
 	}
 
-private:
+protected:
 	SampleProcessType		_sampleProcess;
 	ColorUpdateProcessType	_colorUpdateProcess;
 	LedUpdateProcessType	_ledUpdateProcess;

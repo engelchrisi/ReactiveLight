@@ -19,13 +19,11 @@
 	//LOGF("TheaterChaseLedUpdateProcess::service");
 	const int numLEDs= getNumLEDs();
 	const int maxMicLevel= _songStats.rawSoundStats.maxMicLevel;
-	const int sensorValue= min(_songStats.sensorValue, maxMicLevel);
-	const int show_amount = map(sensorValue, 0, maxMicLevel, 0, numLEDs);
+	const int show_amount = AmountLedsToShow();
 		
 	CRGB* leds= getLEDs();
 	CRGB color1= _colorSettings._Color1;
 	CRGB color2= _colorSettings._Color2;
-	
 		
 	for(int i=0; i< show_amount; i++)
 	{
@@ -59,19 +57,6 @@
 	}
 		
 	Increment();
-}
-
-// Increment the Index and reset at the end
-void TheaterChaseLedUpdateProcess::Increment()
-{
-	if (_Direction == DT_FORWARD)
-	{
-		_Index= (_Index < _TotalSteps)? _Index+1 : 0;
-	}
-	else // Direction == REVERSE
-	{
-		_Index= (_Index > 0)? _Index-1 : _TotalSteps-1;
-	}
 }
 
 TheaterChaseAnimation::TheaterChaseAnimation(Scheduler &manager, CLEDController* pController, uint32_t color1, uint32_t color2) 

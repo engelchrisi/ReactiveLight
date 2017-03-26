@@ -7,6 +7,10 @@
 #include "Logging.h"
 #include "UpDownAnimation.h"
 #include "TheaterChaseAnimation.h"
+#include "RainbowAnimation.h"
+#include "ColorWipeAnimation.h"
+#include "ScannerAnimation.h"
+#include "FadeAnimation.h"
 
 // macros
 // http://yaab-arduino.blogspot.co.il/2015/02/fast-sampling-from-analog-input.html
@@ -166,7 +170,7 @@ void setup()
 static IAnimation* NewAnimation()
 {
 	IAnimation* pNew= NULL;
-	const int rnd= random(40);
+	const int rnd= random(120);
 	if (rnd < 20)
 	{
 		pNew= new TheaterChaseAnimation(s_scheduler, s_pController,
@@ -174,18 +178,22 @@ static IAnimation* NewAnimation()
 										CRGB(255,255,0) //Wheel(random(255), SM_NORMAL);
 										);
 	}
-	//else if (rnd < 40)
-	//{
-	//}
-	//else if (rnd < 60)
-	//{
-	//}
-	//else if (rnd < 80)
-	//{
-	//}
-	//else if (rnd < 100)
-	//{
-	//}
+	else if (rnd < 40)
+	{
+		pNew= new RainbowAnimation(s_scheduler, s_pController);
+	}
+	else if (rnd < 60)
+	{
+		pNew= new ColorWipeAnimation(s_scheduler, s_pController, Wheel(random(255), SM_NORMAL));
+	}
+	else if (rnd < 80)
+	{
+		pNew= new ScannerAnimation(s_scheduler, s_pController, Wheel(random(255), SM_NORMAL));
+	}
+	else if (rnd < 100)
+	{
+		pNew= new FadeAnimation(s_scheduler, s_pController);
+	}
 	else
 	{
 		pNew= new UpDownAnimation(s_scheduler, s_pController);

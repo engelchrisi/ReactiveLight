@@ -22,33 +22,20 @@ protected:
 	virtual void service();
 };
 
-class TheaterChaseLedUpdateProcess : public LedUpdateProcessBase
+class TheaterChaseLedUpdateProcess : public LedUpdateProcessBaseEx
 {
-	typedef LedUpdateProcessBase SUPER;
+	typedef LedUpdateProcessBaseEx SUPER;
 	
-public:
-	enum  DirectionT { DT_FORWARD, DT_REVERSE };
-
 public:
 	TheaterChaseLedUpdateProcess(Scheduler &manager, ProcPriority pr, uint32_t period, CLEDController* pController,
 					const ModeStatisticsT& modeStats, const SongStatisticsT& songStats, const AnimationColorSettingsT& colorSettings)
-		: LedUpdateProcessBase(manager, pr, period, pController, modeStats, songStats, colorSettings)
+		: SUPER(manager, pr, period, pController, modeStats, songStats, colorSettings)
 	{
-		_TotalSteps= getNumLEDs(); 
-		_Index = 0;
-		_Direction = DT_REVERSE;
 	}
 
 protected:
 	virtual void service();
 	
-	void Increment();
-	
-private:
-	DirectionT _Direction;     // direction to run the pattern
-	
-	uint16_t _TotalSteps;  // total number of steps in the pattern
-	uint16_t _Index;  // current step within the pattern
 };
 
 class TheaterChaseAnimation : public AnimationBase<SampleProcess, TheaterChaseColorUpdateProcess, TheaterChaseLedUpdateProcess>

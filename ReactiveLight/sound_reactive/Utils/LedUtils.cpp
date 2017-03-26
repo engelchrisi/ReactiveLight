@@ -22,7 +22,7 @@ uint8_t Blue(uint32_t color)
 
 
 // Calculate 50% dimmed version of a color (used by ScannerUpdate)
-static CRGB DimColor(uint32_t color)
+CRGB DimColor(uint32_t color)
 {
 	// Shift R, G and B components one bit to the right
 	return CRGB(Red(color) >> 1, Green(color) >> 1, Blue(color) >> 1);
