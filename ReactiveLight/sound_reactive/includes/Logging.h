@@ -5,25 +5,11 @@
 #define LOG_TIMESTAMP	1
 
 #define g_logger	Serial
-#define ERR_PREFIX  "ERROR: "
 
 #if LOGGING
 
-extern char g_bufLogging[256];
-
-#if LOG_TIMESTAMP
-#define LOGVAL_SENSOR(format, a, b, c, d, e, f) \
-{ \
-	sprintf(g_bufLogging, "%li| " format, millis(),  a, b, c, d, e, f); \
-	Serial.println(g_bufLogging); \
-}
-#else
-#define LOGVAL_SENSOR(format,  a, b, c, d, e, fg) \
-{ \
-	sprintf(g_bufLogging, format,  a, b, c, d, e, fg); \
-	Serial.println(g_bufLogging); \
-}
-#endif
+#define FSEMIC    F(";")
+#define LOGVAL_SENSOR(a, b, c, d, e, f) LOG11(a, FSEMIC, b, FSEMIC, c, FSEMIC, d, FSEMIC, e, FSEMIC, f)
 
 #define		LOGBEGEOF(text)	BegEofLogger	__eof(F(text));
 
@@ -42,6 +28,7 @@ extern char g_bufLogging[256];
 #define LOGF5(a,b,c,d,e)	LOG5(F(a),b,c,d,e)
 #define LOGF6(a,b,c,d,e,f)	LOG6(F(a),b,c,d,e,f)
 #define LOGF7(a,b,c,d,e,f,g)	LOG7(F(a),b,c,d,e,f,g)
+#define LOGF8(a,b,c,d,e,f,g,h)	LOG8(F(a),b,c,d,e,f,g,h)
 
 #if LOG_TIMESTAMP
 	#define LOG_PREFIX(a) \
@@ -94,6 +81,11 @@ extern char g_bufLogging[256];
 #define LOG11(a, b, c, d, e, f, g, h, i, j, k) \
 /*if (g_logger.m_DEBUG) */{ LOG_PREFIX(a); g_logger.print(b); g_logger.print(c); g_logger.print(d); g_logger.print(e); g_logger.print(f); g_logger.print(g); g_logger.print(h); g_logger.print(i); g_logger.print(j); g_logger.print(k); LOG_SUFFIX; }
 
+#define LOG12(a, b, c, d, e, f, g, h, i, j, k, l) \
+/*if (g_logger.m_DEBUG) */{ LOG_PREFIX(a); g_logger.print(b); g_logger.print(c); g_logger.print(d); g_logger.print(e); g_logger.print(f); g_logger.print(g); g_logger.print(h); g_logger.print(i); g_logger.print(j); g_logger.print(k);  g_logger.print(l); LOG_SUFFIX; }
+
+#define LOG13(a, b, c, d, e, f, g, h, i, j, k, l, m) \
+/*if (g_logger.m_DEBUG) */{ LOG_PREFIX(a); g_logger.print(b); g_logger.print(c); g_logger.print(d); g_logger.print(e); g_logger.print(f); g_logger.print(g); g_logger.print(h); g_logger.print(i); g_logger.print(j); g_logger.print(k);  g_logger.print(l); g_logger.print(m); LOG_SUFFIX; }
 #else
 
 #define LOG(a) 
@@ -118,7 +110,7 @@ extern char g_bufLogging[256];
 #define LOGF9(a, b, c, d, e, f, g, h, i)
 #define LOGF10(a, b, c, d, e, f, g, h, i, j)
 
-#define LOGVAL_SENSOR(format,  a, b, c, d, e, f)
+#define LOGVAL_SENSOR(a, b, c, d, e, f)
 
 #endif // _DEBUG
 

@@ -12,7 +12,7 @@
 #define MAX_ULONG	0xFFFFFFFF
 
 // modes
-#define Use3.3		// use 3.3 voltage. the 5v voltage from usb is not regulated, this is much more stable.
+#define EXTERNAL_VOL_REF		// use 3.3 voltage. the 5v voltage from usb is not regulated, this is much more stable.
 #define ADCReClock	// switch to higher clock, not needed if we are OK with freq between 0 and 4Khz.
 #define ADCFlow		// read data from adc with free-run (not interrupt). much better data, dc low. hard coded for A0.
 

@@ -12,7 +12,7 @@ class UpDownLedUpdateProcess : public LedUpdateProcessBase
 {
 public:
 	UpDownLedUpdateProcess(Scheduler &manager, ProcPriority pr, uint32_t period, CLEDController* pController,
-					const ModeStatisticsT& modeStats, const SongStatisticsT& songStats, const AnimationColorSettingsT& colorSettings)
+					const ModeStatisticsT& modeStats, const SongStatisticsT& songStats, AnimationColorSettingsT& colorSettings)
 		: LedUpdateProcessBase(manager, pr, period, pController, modeStats, songStats, colorSettings)
 	{
 	}
@@ -28,6 +28,7 @@ class UpDownAnimation : public AnimationBase<SampleProcess, ColorUpdateProcess, 
 public:
 	UpDownAnimation(Scheduler &manager, CLEDController* pController) : SUPER(manager, pController)
 	{
+		LOGF("=== UpDownAnimation ===");
 	}
 
 };

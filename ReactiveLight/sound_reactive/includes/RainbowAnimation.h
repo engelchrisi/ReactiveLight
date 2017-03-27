@@ -12,7 +12,7 @@ class RainbowLedUpdateProcess : public LedUpdateProcessBaseEx
 	
 public:
 	RainbowLedUpdateProcess(Scheduler &manager, ProcPriority pr, uint32_t period, CLEDController* pController,
-							const ModeStatisticsT& modeStats, const SongStatisticsT& songStats, const AnimationColorSettingsT& colorSettings)
+							const ModeStatisticsT& modeStats, const SongStatisticsT& songStats, AnimationColorSettingsT& colorSettings)
 		: SUPER(manager, pr, period, pController, modeStats, songStats, colorSettings)
 	{
 		_TotalSteps = 255;
@@ -30,6 +30,8 @@ class RainbowAnimation : public AnimationBase<SampleProcess, ColorUpdateProcess,
 public:
 	RainbowAnimation(Scheduler &manager, CLEDController* pController) : SUPER(manager, pController)
 	{
+		LOGF("=== RainbowAnimation ===");
+		
 	}
 
 	virtual void Enable()

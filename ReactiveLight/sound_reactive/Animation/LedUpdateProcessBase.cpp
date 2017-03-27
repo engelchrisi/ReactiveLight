@@ -4,7 +4,7 @@
 #include "LedUpdateProcessBase.h"
 
 LedUpdateProcessBase::LedUpdateProcessBase(Scheduler &manager, ProcPriority pr, uint32_t period, CLEDController* pController,
-									const ModeStatisticsT& modeStats, const SongStatisticsT& songStats, const AnimationColorSettingsT& colorSettings)
+									const ModeStatisticsT& modeStats, const SongStatisticsT& songStats, AnimationColorSettingsT& colorSettings)
 	: _modeStats(modeStats), _songStats(songStats), _colorSettings(colorSettings),
 		Process(manager, pr, period), FastLedBase(pController)
 {

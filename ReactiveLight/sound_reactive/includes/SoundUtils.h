@@ -20,8 +20,8 @@
 	#define MAX_MIC_LEVEL				(550)
 #elif ADAFRUIT_MAX4466
 	#define VolumeGainFactorBits 	1
-	#define NOICE_MAX 				130
-	#define MAX_MIC_LEVEL 			500
+	#define NOICE_MAX 				( 50 << VolumeGainFactorBits)
+	#define MAX_MIC_LEVEL 			(250 << VolumeGainFactorBits)
 #else
 	#define NOICE_MAX 			(1)  // Noise/hum/interference in mic signal
 	#define MAX_MIC_LEVEL     (1024)

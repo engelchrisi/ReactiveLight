@@ -17,15 +17,13 @@
 #define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
 #define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
 
-static DipSwitch	s_DipSwitch(DPIN_DIP_0, DPIN_DIP_2);
+static DipSwitch<DPIN_DIP_0, DPIN_DIP_2>	s_DipSwitch;
 
 static CLEDController* s_pController= NULL;
 
 #define _countof(arr) (sizeof(arr)/sizeof(arr[0]))
 
 static IAnimation* NewAnimation();
-
-char g_bufLogging[256]= "";
 
 /*Sometimes readings are wrong or strange. How much is a reading allowed
 to deviate from the average to not be discarded? **/
@@ -36,23 +34,22 @@ float fscale( float originalMin, float originalMax, float newBegin, float newEnd
 
 
 //Led array
-static CRGB *s_leds= NULL;
+#define		MAX_NUMLEDS		220
+static CRGB s_leds[MAX_NUMLEDS]= {0};
 
 bool _DEBUG= false;
 
 template<uint8_t DATA_PIN, EOrder RGB_ORDER> class WS2813_GRB : public WS2813Controller<DATA_PIN, GRB> {};
 	
-int readDipSwitchFunc();
-static CachedValue<int, 10*1000/*ms*/>	s_DipSwitchValue(readDipSwitchFunc);
+uint8_t readDipSwitchFunc();
+static CachedValue<uint8_t, 10*1000/*ms*/>	s_DipSwitchValue(readDipSwitchFunc);
 
 static Scheduler s_scheduler; // Create a global Scheduler object
-
-static IAnimation* s_pCurrentAnimation= NULL;
 
 // ------------------------------------------------------------
 
 
-int readDipSwitchFunc() {
+uint8_t readDipSwitchFunc() {
 	return s_DipSwitch.getValue();
 }
 
@@ -62,29 +59,28 @@ void TestLEDs()
 	CRGB	initValue= CRGB(0, 0, 255);
 
 	CRGB* leds= s_pController->leds();
-	for (int i = 0; i < s_pController->size(); i++)
+	const int numLeds= s_pController->size();
+	for (int i = 0; i < numLeds; i++)
 	{
 		leds[i] = initValue;
 	}
 	
 	FastLED.show();
-	delay(1000);
-}
-
-void ChangeAnimation()
-{
-	IAnimation* pLastAnimation= s_pCurrentAnimation;
-
-	s_pCurrentAnimation= NewAnimation();
-	s_pCurrentAnimation->Enable();
 	
-	if (pLastAnimation != NULL)
+	float fadeScale= 1.3;
+	for (int j= 0; j <20; ++j)
 	{
-		pLastAnimation->Disable(); 
-		delete pLastAnimation;
-		pLastAnimation= NULL;
+		for (int i = 0; i < numLeds; i++)
+		{
+			fade(leds[i], fadeScale);
+		}
+		FastLED.show();
+
+		Utils::delayMs(100);
 	}
+	
 }
+
 
 
 class AnimationChanger : public Process
@@ -92,13 +88,33 @@ class AnimationChanger : public Process
 public:
 	AnimationChanger(Scheduler &manager, ProcPriority pr, uint32_t period) : Process(manager, pr, period)
 	{
+		_pCurrentAnimation= NULL;
 	}
-
+		
+	virtual ~AnimationChanger()
+	{
+		_pCurrentAnimation->Disable();
+		delete _pCurrentAnimation;
+	}
+	
 protected:
 	virtual void service()
 	{
-		ChangeAnimation();
+		IAnimation* pLastAnimation= _pCurrentAnimation;
+
+		_pCurrentAnimation= NewAnimation();
+		_pCurrentAnimation->Enable();
+		
+		if (pLastAnimation != NULL)
+		{
+			pLastAnimation->Disable();
+			delete pLastAnimation;
+			pLastAnimation= NULL;
+		}	
 	}
+	
+private:
+	IAnimation* _pCurrentAnimation;
 };
 
 static AnimationChanger	s_AnimationChanger(s_scheduler, LOW_PRIORITY, 1 * 60 * 1000);
@@ -112,14 +128,14 @@ void setup()
 	// different seed numbers each time the sketch runs.
 	// randomSeed() will then shuffle the random function.
 	randomSeed(analogRead(APIN_UNCONNECTED_FOR_RND));
-		
-	Serial.begin(38400); // );115200
+#if LOGGING
+	Serial.begin(38400); 
 	while (!Serial);
 	while (Serial.available()) {
 		Serial.read();
 	}
-		
-	const int nDipValue= s_DipSwitchValue.readValue();
+#endif
+	const uint8_t nDipValue= s_DipSwitchValue.readValue();
 	LOGF2("#DIP Value=", nDipValue); 
 	
 	switch(nDipValue)
@@ -128,7 +144,7 @@ void setup()
 		case 1: 	numLeds= 50; _DEBUG= true; break;
 		case 2: 	numLeds= 100; _DEBUG= false; break;
 		case 3: 	numLeds= 150; _DEBUG= false; break;
-		default:	numLeds= 220;
+		default:	numLeds= MAX_NUMLEDS;
 					_DEBUG= false;
 					break;
 	}
@@ -136,7 +152,7 @@ void setup()
 #ifdef ADCFlow
 	adc_init();
 #else
-	#ifdef Use3.3
+	#ifdef EXTERNAL_VOL_REF
 		analogReference(EXTERNAL); // 3.3V to AREF
 	#endif
 #endif
@@ -153,8 +169,6 @@ void setup()
 	sbi(ADCSRA, ADPS0);
 #endif
 		
-	s_leds= new CRGB[numLeds];
-	
 	//Set all lights to make sure all are working as expected
 	//FastLED.addLeds<NEOPIXEL, DPIN_LED>(s_leds, NUM_LEDS);
 	s_pController= &FastLED.addLeds<WS2813_GRB, DPIN_LED>(s_leds, numLeds);
@@ -174,9 +188,7 @@ static IAnimation* NewAnimation()
 	if (rnd < 20)
 	{
 		pNew= new TheaterChaseAnimation(s_scheduler, s_pController,
-										CRGB(0,37,248), //Wheel(random(255), SM_NORMAL);
-										CRGB(255,255,0) //Wheel(random(255), SM_NORMAL);
-										);
+										Wheel(random(255), SM_NORMAL), Wheel(random(255), SM_HIGH));
 	}
 	else if (rnd < 40)
 	{

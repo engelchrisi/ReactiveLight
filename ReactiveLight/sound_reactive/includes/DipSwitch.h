@@ -1,19 +1,15 @@
 #ifndef __DIPSWITCH_H__
 #define __DIPSWITCH_H__
 
+template <int START_PIN, int END_PIN>
 class DipSwitch 
 {
-private:
-	int _startPin;
-	int _endPin;
-	
+
 public:
-	DipSwitch(int startPin, int endPin)
+	DipSwitch()
 	{
-		_startPin= startPin;
-		_endPin= endPin;
-		
-		for (int pin= _startPin; pin <= _endPin; ++pin)
+
+		for (int pin= START_PIN; pin <= END_PIN; ++pin)
 		{
 			/* Unlike pinMode(INPUT), there is no pull-down resistor necessary. An internal
 			 20K-ohm resistor is pulled to 5V. This configuration causes the input to
@@ -22,15 +18,15 @@ public:
 		}
 	}	
 	
-	int getValue() const 
+	uint8_t getValue() const 
 	{
-		int value= 0;
+		uint8_t value= 0;
 		
-		for (int pin= _startPin; pin <= _endPin; ++pin)
+		for (int pin= START_PIN; pin <= END_PIN; ++pin)
 		{
 			if (LOW == digitalRead(pin)) // LOW => closed, s. INPUT_PULLUP
 			{
-				value |= 1 << (pin-_startPin);
+				value |= 1 << (pin-START_PIN);
 				
 			}
 		}

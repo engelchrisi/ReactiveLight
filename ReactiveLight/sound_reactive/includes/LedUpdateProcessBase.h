@@ -8,7 +8,7 @@ class LedUpdateProcessBase : public Process, public FastLedBase
 {
 public:
 	LedUpdateProcessBase(Scheduler &manager, ProcPriority pr, uint32_t period, CLEDController* pController,
-						const ModeStatisticsT& modeStats, const SongStatisticsT& songStats, const AnimationColorSettingsT& colorSettings);
+						const ModeStatisticsT& modeStats, const SongStatisticsT& songStats, AnimationColorSettingsT& colorSettings);
 	
 protected:
 	virtual void service()= 0;
@@ -17,7 +17,7 @@ protected:
 protected:
 	const ModeStatisticsT&		_modeStats;
 	const SongStatisticsT&		_songStats;
-	const AnimationColorSettingsT&	_colorSettings;
+	AnimationColorSettingsT&	_colorSettings;
 
 };
 
@@ -29,7 +29,7 @@ class LedUpdateProcessBaseEx : public LedUpdateProcessBase
 
 	public:
 	LedUpdateProcessBaseEx(Scheduler &manager, ProcPriority pr, uint32_t period, CLEDController* pController,
-	const ModeStatisticsT& modeStats, const SongStatisticsT& songStats, const AnimationColorSettingsT& colorSettings)
+	const ModeStatisticsT& modeStats, const SongStatisticsT& songStats, AnimationColorSettingsT& colorSettings)
 	: SUPER(manager, pr, period, pController, modeStats, songStats, colorSettings)
 	{
 		_TotalSteps= getNumLEDs();

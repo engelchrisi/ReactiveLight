@@ -29,7 +29,7 @@ class ScannerLedUpdateProcess : public LedUpdateProcessBaseEx
 	
 public:
 	ScannerLedUpdateProcess(Scheduler &manager, ProcPriority pr, uint32_t period, CLEDController* pController,
-		const ModeStatisticsT& modeStats, const SongStatisticsT& songStats, const AnimationColorSettingsT& colorSettings)
+		const ModeStatisticsT& modeStats, const SongStatisticsT& songStats, AnimationColorSettingsT& colorSettings)
 		: SUPER(manager, pr, period, pController, modeStats, songStats, colorSettings)
 	{
 		_TotalSteps = (getNumLEDs() - 1) * 2;
@@ -48,6 +48,8 @@ class ScannerAnimation : public AnimationBase<SampleProcess, ScannerColorUpdateP
 public:
 	ScannerAnimation(Scheduler &manager, CLEDController* pController, uint32_t color1) : SUPER(manager, pController)
 	{
+		LOGF("=== ScannerAnimation ===");
+		
 		_colorSettings._Color1 = color1;
 	}
 

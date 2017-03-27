@@ -63,7 +63,7 @@ bool SoundBase::updateSoundStatistics(int log2Samples)
 
 	_songStats.sensorValue= sensorValue;
 	
-	LOGVAL_SENSOR("%i;%i;%i;%i;%i;%lu", (_modeStats.songMode == SM_NORMAL)? 0:10, 
+	LOGVAL_SENSOR((_modeStats.songMode == SM_NORMAL)? 0:10, 
 				noiceLevel, sensorValue, rawSensorValue, _songStats.rawSoundStats.maxMicLevel, 
 				long(_songStats.songAvg));
 
@@ -195,9 +195,9 @@ void SoundBase::detectHighMode(int sensorValue)
 #define MAX_POTI	800
 
 
-int readNoiceLevelFunc() {
+uint16_t readNoiceLevelFunc() {
 	#ifdef APIN_POTI_NOICE_LEVEL
-	int v= analogRead(APIN_POTI_NOICE_LEVEL);
+	uint16_t v= analogRead(APIN_POTI_NOICE_LEVEL);
 
 	if (_DEBUG) {
 		LOGF2("#readNoiceLevel V=", v);
@@ -212,17 +212,17 @@ int readNoiceLevelFunc() {
 
 int SoundBase::readNoiceLevel() 
 {
-	static CachedValue<int, 1000/*ms*/>	s_NoiceLevelValue(readNoiceLevelFunc);
-	int v= s_NoiceLevelValue.readValue();
+	static CachedValue<uint16_t, 1000/*ms*/>	s_NoiceLevelValue(readNoiceLevelFunc);
+	uint16_t v= s_NoiceLevelValue.readValue();
 	
 	int level= map(v, 0, MAX_POTI, 0, NOICE_MAX);
 	return level;
 }
 
 
-int readMaxMicLevelFunc() {
+uint16_t readMaxMicLevelFunc() {
 	#ifdef APIN_POTI_MAX_MIC_LEVEL
-	int v= analogRead(APIN_POTI_MAX_MIC_LEVEL);
+	uint16_t v= analogRead(APIN_POTI_MAX_MIC_LEVEL);
 	
 	if (_DEBUG) {
 		LOGF2("#readMaxMicLevel V=", v);
@@ -237,8 +237,8 @@ int readMaxMicLevelFunc() {
 
 int SoundBase::readMaxMicLevel() 
 {
-	static CachedValue<int, 1000/*ms*/>	s_MaxMicLevelSensorValue(readMaxMicLevelFunc);
-	int v= s_MaxMicLevelSensorValue.readValue();
+	static CachedValue<uint16_t, 1000/*ms*/>	s_MaxMicLevelSensorValue(readMaxMicLevelFunc);
+	uint16_t v= s_MaxMicLevelSensorValue.readValue();
 	
 	int level= map(v, 0, MAX_POTI, 0, MAX_MIC_LEVEL);
 	
@@ -267,7 +267,7 @@ void adc_init()
 	#endif
 
 	ADMUX = 0x0; // use adc0 (hardcoded, doesn't use MicPin). Use ARef pin for analog reference (same as analogReference(EXTERNAL)).
-	#ifndef Use3.3
+	#ifndef EXTERNAL_VOL_REF
 	ADMUX |= (1<<REFS0); // AREF = AVcc
 	//ADMUX |= 0x40; // Use Vcc for analog reference.
 	#endif

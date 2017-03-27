@@ -254,7 +254,7 @@
         <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
       </AvrGccCpp>
     </ToolchainSettings>
-    <PostBuildEvent>C:\bin\avrdude_uno.cmd 7 $(OutputDirectory)\$(OutputFileName).hex</PostBuildEvent>
+    <PostBuildEvent>C:\bin\avrdude_nano.cmd 22 $(OutputDirectory)\$(OutputFileName).hex wiring</PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Animation\ColorUpdateProcess.cpp">

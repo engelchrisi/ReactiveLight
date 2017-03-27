@@ -29,7 +29,7 @@ class ColorWipeLedUpdateProcess : public LedUpdateProcessBaseEx
 	
 public:
 	ColorWipeLedUpdateProcess(Scheduler &manager, ProcPriority pr, uint32_t period, CLEDController* pController,
-		const ModeStatisticsT& modeStats, const SongStatisticsT& songStats, const AnimationColorSettingsT& colorSettings)
+		const ModeStatisticsT& modeStats, const SongStatisticsT& songStats, AnimationColorSettingsT& colorSettings)
 		: SUPER(manager, pr, period, pController, modeStats, songStats, colorSettings)
 	{
 		_TotalSteps = getNumLEDs();
@@ -49,6 +49,8 @@ class ColorWipeAnimation : public AnimationBase<SampleProcess, ColorWipeColorUpd
 public:
 	ColorWipeAnimation(Scheduler &manager, CLEDController* pController, uint32_t color1) : SUPER(manager, pController)
 	{
+		LOGF("=== ColorWipeAnimation ===");
+		
 		_colorSettings._Color1 = color1;
 	}
 

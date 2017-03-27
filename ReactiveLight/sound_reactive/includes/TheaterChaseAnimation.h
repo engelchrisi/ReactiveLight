@@ -28,7 +28,7 @@ class TheaterChaseLedUpdateProcess : public LedUpdateProcessBaseEx
 	
 public:
 	TheaterChaseLedUpdateProcess(Scheduler &manager, ProcPriority pr, uint32_t period, CLEDController* pController,
-					const ModeStatisticsT& modeStats, const SongStatisticsT& songStats, const AnimationColorSettingsT& colorSettings)
+					const ModeStatisticsT& modeStats, const SongStatisticsT& songStats, AnimationColorSettingsT& colorSettings)
 		: SUPER(manager, pr, period, pController, modeStats, songStats, colorSettings)
 	{
 	}

@@ -62,6 +62,8 @@
 TheaterChaseAnimation::TheaterChaseAnimation(Scheduler &manager, CLEDController* pController, uint32_t color1, uint32_t color2) 
 	: SUPER(manager, pController)
 {
+	LOGF("=== TheaterChaseAnimation ===");
+		
 	_colorSettings._Color1 = color1;
 	#if 1
 	_colorSettings._Color2= color2;
