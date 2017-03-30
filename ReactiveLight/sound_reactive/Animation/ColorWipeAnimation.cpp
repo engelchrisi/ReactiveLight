@@ -7,15 +7,12 @@
 	SUPER::service();
 	
 	addOffset(_colorSettings._Color1, _colorSettings.colorOffset);
-	
-	_colorSettings._Color2= _colorSettings._Color1;
-	fade(_colorSettings._Color2, 7.0);
 }
 
 
 /*virtual*/ void ColorWipeLedUpdateProcess::service()
 {
-	CRGB color= (_Direction == DT_FORWARD)? _colorSettings._Color1 : CRGB::Black;
+	CRGB color= (_Direction == DT_FORWARD)? _colorSettings._Color1 : CRGB::Black; // TODO: fade instead of black
 	setPixelColor(_Index, color);
 	show();
 	

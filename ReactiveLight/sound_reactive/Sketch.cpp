@@ -7,6 +7,7 @@
 #include "Logging.h"
 #include "UpDownAnimation.h"
 #include "TheaterChaseAnimation.h"
+#include "SophiaAnimation.h"
 #include "RainbowAnimation.h"
 #include "ColorWipeAnimation.h"
 #include "ScannerAnimation.h"
@@ -173,7 +174,7 @@ void setup()
 	//FastLED.addLeds<NEOPIXEL, DPIN_LED>(s_leds, NUM_LEDS);
 	s_pController= &FastLED.addLeds<WS2813_GRB, DPIN_LED>(s_leds, numLeds);
 	
-	TestLEDs();
+	//TestLEDs();
 	
 	s_AnimationChanger.add(true);
 	// run once now
@@ -184,7 +185,7 @@ void setup()
 static IAnimation* NewAnimation()
 {
 	IAnimation* pNew= NULL;
-	const int rnd= random(120);
+	const int rnd= 110; //random(120);
 	if (rnd < 20)
 	{
 		pNew= new TheaterChaseAnimation(s_scheduler, s_pController,
@@ -205,6 +206,11 @@ static IAnimation* NewAnimation()
 	else if (rnd < 100)
 	{
 		pNew= new FadeAnimation(s_scheduler, s_pController);
+	}
+	else if (rnd < 120)
+	{
+		pNew= new SophiaAnimation(s_scheduler, s_pController,
+				CRGB::Yellow, CRGB::Blue);
 	}
 	else
 	{

@@ -9,6 +9,7 @@ struct RgbColorT {
 	int b;
 };
 
+CRGB MorpheColors(CRGB color1, CRGB color2, int current, int max);
 
 uint32_t Wheel(byte WheelPos, SongModeT songMode);
 

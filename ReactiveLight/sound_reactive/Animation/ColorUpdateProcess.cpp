@@ -17,7 +17,7 @@ ColorUpdateProcess::ColorUpdateProcess(Scheduler &manager, ProcPriority pr, uint
 	RgbColorT colorOffset;
 		
 	if (_modeStats.songMode == SM_NORMAL) {
-		fadeScale = 2.0;
+		fadeScale = 1.5; // 2.0;
 		colorOffset.r = -1;
 		colorOffset.g = 1;
 		colorOffset.b = 2;

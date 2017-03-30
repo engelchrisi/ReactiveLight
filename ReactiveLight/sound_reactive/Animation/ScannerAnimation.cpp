@@ -28,7 +28,8 @@
 		}
 		else // Fading tail
 		{
-			leds[i]= DimColor(leds[i]);
+			float fadeScale= 1.2;
+			fade(leds[i], fadeScale); 
 		}
 	}
 	

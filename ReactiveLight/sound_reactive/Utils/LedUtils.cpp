@@ -20,6 +20,18 @@ uint8_t Blue(uint32_t color)
 	return color & 0xFF;
 }
 
+// Calculate linear interpolation between Color1 and Color2
+// Optimize order of operations to minimize truncation error
+CRGB MorpheColors(CRGB color1, CRGB color2, int current, int max)
+{
+	const uint16_t delta= (max - current);
+	uint8_t red = ((Red(color1) * delta)     + (Red(color2)   * current)) / max;
+	uint8_t green = ((Green(color1) * delta) + (Green(color2) * current)) / max;
+	uint8_t blue = ((Blue(color1) * delta)   + (Blue(color2)  * current)) / max;
+	
+	CRGB color(red, green, blue);
+	return color;
+}
 
 // Calculate 50% dimmed version of a color (used by ScannerUpdate)
 CRGB DimColor(uint32_t color)

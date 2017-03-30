@@ -44,7 +44,7 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
       <AvrGccCpp>
-        <avrgcc.common.Device>-mmcu=atmega328p -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\gcc\dev\atmega328p"</avrgcc.common.Device>
+        <avrgcc.common.Device>-mmcu=atmega328p -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.2.132\gcc\dev\atmega328p"</avrgcc.common.Device>
         <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
         <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
         <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
@@ -66,7 +66,6 @@
         </avrgcc.compiler.symbols.DefSymbols>
         <avrgcc.compiler.directories.IncludePaths>
           <ListValues>
-            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\include</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\core</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\fastled</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\fastled\lib8tion</Value>
@@ -80,6 +79,7 @@
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\fastled\platforms\arm\stm32</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\fastled\platforms\esp\8266</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\standard</Value>
+            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.132\include</Value>
           </ListValues>
         </avrgcc.compiler.directories.IncludePaths>
         <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -106,7 +106,6 @@
         </avrgcccpp.compiler.symbols.DefSymbols>
         <avrgcccpp.compiler.directories.IncludePaths>
           <ListValues>
-            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\include</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\core</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\fastled</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\fastled\lib8tion</Value>
@@ -123,6 +122,7 @@
             <Value>../includes</Value>
             <Value>../../ArduinoCore/include/libraries/ringbuf</Value>
             <Value>../../ArduinoCore/include/libraries/Arduino_Process_Scheduler</Value>
+            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.132\include</Value>
           </ListValues>
         </avrgcccpp.compiler.directories.IncludePaths>
         <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
@@ -141,7 +141,7 @@
         <avrgcccpp.linker.miscellaneous.LinkerFlags>-Os</avrgcccpp.linker.miscellaneous.LinkerFlags>
         <avrgcccpp.assembler.general.IncludePaths>
           <ListValues>
-            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\include</Value>
+            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.132\include</Value>
           </ListValues>
         </avrgcccpp.assembler.general.IncludePaths>
         <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
@@ -151,7 +151,7 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
       <AvrGccCpp>
-        <avrgcc.common.Device>-mmcu=atmega328p -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\gcc\dev\atmega328p"</avrgcc.common.Device>
+        <avrgcc.common.Device>-mmcu=atmega328p -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.2.132\gcc\dev\atmega328p"</avrgcc.common.Device>
         <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
         <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
         <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
@@ -173,7 +173,6 @@
         </avrgcc.compiler.symbols.DefSymbols>
         <avrgcc.compiler.directories.IncludePaths>
           <ListValues>
-            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\include</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\core</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\fastled</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\fastled\lib8tion</Value>
@@ -187,6 +186,7 @@
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\fastled\platforms\arm\stm32</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\fastled\platforms\esp\8266</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\variants\standard</Value>
+            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.132\include</Value>
           </ListValues>
         </avrgcc.compiler.directories.IncludePaths>
         <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -213,7 +213,6 @@
         </avrgcccpp.compiler.symbols.DefSymbols>
         <avrgcccpp.compiler.directories.IncludePaths>
           <ListValues>
-            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\include</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\core</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\fastled</Value>
             <Value>%24(ProjectDir)\..\ArduinoCore\include\libraries\fastled\lib8tion</Value>
@@ -230,6 +229,7 @@
             <Value>../includes</Value>
             <Value>../../ArduinoCore/include/libraries/ringbuf</Value>
             <Value>../../ArduinoCore/include/libraries/Arduino_Process_Scheduler</Value>
+            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.132\include</Value>
           </ListValues>
         </avrgcccpp.compiler.directories.IncludePaths>
         <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
@@ -248,13 +248,13 @@
         <avrgcccpp.linker.miscellaneous.LinkerFlags>-Os</avrgcccpp.linker.miscellaneous.LinkerFlags>
         <avrgcccpp.assembler.general.IncludePaths>
           <ListValues>
-            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\include</Value>
+            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.2.132\include</Value>
           </ListValues>
         </avrgcccpp.assembler.general.IncludePaths>
         <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
       </AvrGccCpp>
     </ToolchainSettings>
-    <PostBuildEvent>C:\bin\avrdude_nano.cmd 22 $(OutputDirectory)\$(OutputFileName).hex wiring</PostBuildEvent>
+    <PostBuildEvent>C:\bin\avrdude_nano.cmd 8 $(OutputDirectory)\$(OutputFileName).hex wiring</PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Animation\ColorUpdateProcess.cpp">
@@ -276,6 +276,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Animation\ScannerAnimation.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Animation\SophiaAnimation.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Animation\TheaterChaseAnimation.cpp">
@@ -327,6 +330,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="includes\ScannerAnimation.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="includes\SophiaAnimation.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="includes\SoundUtils.h">

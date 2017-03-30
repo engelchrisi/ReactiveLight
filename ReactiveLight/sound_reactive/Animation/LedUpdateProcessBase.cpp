@@ -17,5 +17,8 @@ LedUpdateProcessBase::LedUpdateProcessBase(Scheduler &manager, ProcPriority pr, 
 	const int maxMicLevel= _songStats.rawSoundStats.maxMicLevel;
 	const int sensorValue= min(_songStats.sensorValue, maxMicLevel);
 		
-	return map(sensorValue, 0, maxMicLevel, 0, numLEDs);
+	int nLeds= map(sensorValue, 0, maxMicLevel, 0, numLEDs);
+	
+	int minLEDs= numLEDs / 5 + random(10);
+	return max(nLeds, minLEDs); 
 }
