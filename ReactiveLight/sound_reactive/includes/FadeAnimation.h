@@ -17,7 +17,7 @@ public:
 		const ModeStatisticsT& modeStats, const SongStatisticsT& songStats, AnimationColorSettingsT& colorSettings)
 		: SUPER(manager, pr, period, pController, modeStats, songStats, colorSettings)
 	{
-		_TotalSteps = 20;
+		_TotalSteps = 50;
 		_Index = 0;
 		_Direction= DT_FORWARD;
 		

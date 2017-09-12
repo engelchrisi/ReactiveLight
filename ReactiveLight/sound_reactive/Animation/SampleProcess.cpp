@@ -8,6 +8,7 @@ SampleProcess::SampleProcess(Scheduler &manager, ProcPriority pr, uint32_t perio
 		SoundBase(modeStats, songStats)
 {
 }
+
 	
 /*virtual*/ void SampleProcess::service()
 {

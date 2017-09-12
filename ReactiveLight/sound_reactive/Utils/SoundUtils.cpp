@@ -15,6 +15,11 @@
 
 #define HIGH_LIMIT	((30 * 5) / DELAY_MS)
 
+uint16_t readMaxMicLevelFunc();
+uint16_t readNoiceLevelFunc();
+
+static CachedValue<uint16_t, 1000/*ms*/>	s_MaxMicLevelSensorValue(readMaxMicLevelFunc);
+static CachedValue<uint16_t, 1000/*ms*/>	s_NoiceLevelValue(readNoiceLevelFunc);
 
 SoundBase::SoundBase(ModeStatisticsT& modeStats, SongStatisticsT& songStats)
 		: _modeStats(modeStats), _songStats(songStats)
@@ -63,8 +68,9 @@ bool SoundBase::updateSoundStatistics(int log2Samples)
 
 	_songStats.sensorValue= sensorValue;
 	
+	const int maxMicLevel= _songStats.rawSoundStats.maxMicLevel;	
 	LOGVAL_SENSOR((_modeStats.songMode == SM_NORMAL)? 0:10, 
-				noiceLevel, sensorValue, rawSensorValue, _songStats.rawSoundStats.maxMicLevel, 
+				noiceLevel, sensorValue, rawSensorValue, maxMicLevel, 
 				long(_songStats.songAvg));
 
 	return true;
@@ -133,6 +139,12 @@ void SoundBase::detectHighMode(int sensorValue)
 	const unsigned long currenMillis= millis();
 	const unsigned long elapsedSinceLastHigh= currenMillis - _modeStats.lastMillis;
 	//const float compareValue= (float)s_song_avg/(float)s_iter;
+	
+	if (sensorValue == 0)
+	{
+		_modeStats.songMode= SM_NORMAL;
+		return;
+	}
 	
 	if (float(sensorValue) > (float(compareValue)  * 1.1 ))
 	{
@@ -212,7 +224,6 @@ uint16_t readNoiceLevelFunc() {
 
 int SoundBase::readNoiceLevel() 
 {
-	static CachedValue<uint16_t, 1000/*ms*/>	s_NoiceLevelValue(readNoiceLevelFunc);
 	uint16_t v= s_NoiceLevelValue.readValue();
 	
 	int level= map(v, 0, MAX_POTI, 0, NOICE_MAX);
@@ -237,7 +248,6 @@ uint16_t readMaxMicLevelFunc() {
 
 int SoundBase::readMaxMicLevel() 
 {
-	static CachedValue<uint16_t, 1000/*ms*/>	s_MaxMicLevelSensorValue(readMaxMicLevelFunc);
 	uint16_t v= s_MaxMicLevelSensorValue.readValue();
 	
 	int level= map(v, 0, MAX_POTI, 0, MAX_MIC_LEVEL);

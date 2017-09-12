@@ -6,7 +6,7 @@
 {
 	SUPER::service();
 	
-	addOffset(_colorSettings._Color1, _colorSettings.colorOffset);
+	//addOffset(_colorSettings._Color1, _colorSettings.colorOffset);
 }
 
 
@@ -29,6 +29,8 @@
 		else // Fading tail
 		{
 			float fadeScale= 1.2;
+			addOffset(leds[i], _colorSettings.colorOffset);
+
 			fade(leds[i], fadeScale); 
 		}
 	}

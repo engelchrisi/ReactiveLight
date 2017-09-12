@@ -102,16 +102,15 @@ protected:
 	virtual void service()
 	{
 		IAnimation* pLastAnimation= _pCurrentAnimation;
-
-		_pCurrentAnimation= NewAnimation();
-		_pCurrentAnimation->Enable();
-		
 		if (pLastAnimation != NULL)
 		{
 			pLastAnimation->Disable();
 			delete pLastAnimation;
 			pLastAnimation= NULL;
-		}	
+		}
+
+		_pCurrentAnimation= NewAnimation();
+		_pCurrentAnimation->Enable();
 	}
 	
 private:
@@ -171,7 +170,6 @@ void setup()
 #endif
 		
 	//Set all lights to make sure all are working as expected
-	//FastLED.addLeds<NEOPIXEL, DPIN_LED>(s_leds, NUM_LEDS);
 	s_pController= &FastLED.addLeds<WS2813_GRB, DPIN_LED>(s_leds, numLeds);
 	
 	//TestLEDs();
@@ -185,7 +183,7 @@ void setup()
 static IAnimation* NewAnimation()
 {
 	IAnimation* pNew= NULL;
-	const int rnd= 110; //random(120);
+	const int rnd= random(140);
 	if (rnd < 20)
 	{
 		pNew= new TheaterChaseAnimation(s_scheduler, s_pController,

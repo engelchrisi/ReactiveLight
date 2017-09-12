@@ -1,7 +1,7 @@
 #ifndef _LOGGING_H__
 #define _LOGGING_H__
 
-#define LOGGING			1
+#define LOGGING			0
 #define LOG_TIMESTAMP	1
 
 #define g_logger	Serial
